@@ -1,0 +1,48 @@
+<section class="taba import excel">
+    <section class="header">
+        <h2>Importar</h2>
+    </section>
+    
+    <section class="body">
+        <table class="ui striped black table import_pedido">
+            <thead>
+                <tr>
+                    <th><input type="checkbox" ng-model="all" ng-click="checkAll()"></th>
+                    <th>
+                        <select ng-model="columna.a">
+                            <option value="codProducto">Código de producto</option>
+                            <option value="cantidad">Cantidad</option>
+                            <option value="detalle">Detalle</option>
+                        </select>
+                    </th> 
+                    <th>
+                        <select ng-model="columna.b">
+                            <option value="codProducto">Código de producto</option>
+                            <option value="cantidad">Cantidad</option>
+                            <option value="detalle">Detalle</option>
+                        </select>
+                    </th> 
+                    <th>
+                        <select ng-model="columna.c">
+                            <option value="codProducto">Código de producto</option>
+                            <option value="cantidad">Cantidad</option>
+                            <option value="detalle">Detalle</option>
+                        </select>
+                    </th> 
+                </tr>
+            </thead>
+            <tbody >
+                <tr ng-repeat="cell in cells">
+                    <td ng-init="cellOrder[$index].import = true"> <input type="checkbox" ng-model="cellOrder[$index].import" /></td>
+                    <td ng-init="cellOrder[$index].A = cell.A "> {{ cell.A }} </td>
+                    <td ng-init="cellOrder[$index].B = cell.B "> {{ cell.B }} </td>
+                    <td ng-init="cellOrder[$index].C = cell.C "> {{ cell.C }} </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <footer>
+        <button class="fluid ui button blue" ng-click="importarExcel()"> importar </button>
+    </footer>
+</section>

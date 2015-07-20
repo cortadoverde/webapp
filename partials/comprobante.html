@@ -1,0 +1,83 @@
+<div class="taba comprobante">
+    <section class="header">
+        <h2>{{factura.NombreImprimir}} {{factura.Comprobante}}</h2>
+        <h3>{{factura.FechaSql | date:"dd/MM/yyyy" }}</h3>
+    </section>
+    
+    <section class="cliente">
+        <p>
+           <span class="dato">
+            <strong>Cuenta:</strong> {{ factura.Cuenta }}            
+            </span>
+            <span class="dato">
+                <strong>Cliente:</strong> {{ factura.RazonSocial }}
+            </span> 
+        </p>
+        <p>
+           <span class="dato">
+            <strong>Domicilio:</strong> {{ factura.Domicilio }}            
+            </span>
+            <span class="dato">
+                <strong>Código Postal:</strong> {{ factura.CodigoPostal }}
+            </span> 
+        </p>  
+    </section>
+
+    <table class="ui striped black table">
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Cant</th>
+            <th>Descripción</th>
+            <th>Importe</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="movimiento in factura.movimientos">
+                <td>{{ movimiento.CodProducto}}</td>
+                <td>{{ movimiento.Cantidad}}</td>
+                <td>{{ movimiento.Nombre}}</td>
+                <td ng-class="{ saldo_negativo : movimiento.ImporteFac < 0 }" class="text align right">{{ movimiento.ImporteFac | currency:"$":2 }}</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <section class="resumen">
+        <section class="bonificaciones">
+            <p>
+                <span class="dato">
+                    <strong>Bonif. Acordada:</strong> {{ factura.BonificacionAcordada }}            
+                </span> 
+            </p>
+            <p>
+                <span class="dato">
+                    <strong>Bonif. Pronto Pago:</strong> {{ factura.BonificacionProntoPago }}            
+                </span> 
+            </p>
+
+        </section>
+        <section class="subtotales">
+            <table class="ui  table">
+                <tbody>
+                    <tr>
+                        <td class="text align left" >Sub Total:</td>
+                        <td class="text align right"> {{ factura.ImporteSubtotalPanta | currency:"$":2 }}  </td>
+                    </tr>
+                    <tr>
+                        <td class="text align left" >Desc.:</td>
+                        <td class="text align right"> {{ factura.ImporteDescuento | currency:"$":2 }}  </td>
+                    </tr>
+                    <tr>
+                        <td class="text align left" >I.V.A.:</td>
+                        <td class="text align right"> {{ factura.ImporteIVA | currency:"$":2 }}  </td>
+                    </tr>
+                    <tr class="total">
+                        <td class="text align left" >Total:</td>
+                        <td class="text align right"> {{ factura.ImporteCbte | currency:"$":2 }}  </td>
+                    </tr>
+
+                </tbody>
+            </table>           
+        </section>
+    </section>
+</div>

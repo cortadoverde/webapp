@@ -1,0 +1,45 @@
+<div class="ui dividing header">
+  <div class="content">
+    Disponibilidad de productos
+  </div>
+</div>
+
+<section class="actions pedidos">   
+    <section class="search">    
+        <div class="field">
+            <div class="ui left icon input fluid">
+                <i class="search icon"></i>
+                <input type="text" ng-model="search" value="{{search}}" placeholder="Buscar productos"/ ng-keypress="evalKey($event)">
+            </div>
+        </div>
+        <div class="ui buttons">
+          <button class="ui button" ng-click="buscarCodigoProducto()">Código</button>
+          <div class="or"></div>
+          <button class="ui button" ng-click="buscarCodigoCliente()">Código cliente</button>
+        </div>
+    </section>
+</section>
+
+<table class="ui striped black table" ng-show="items.length > 0">
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Descripcion</th>
+        <th ng-show="showCantidad">Cantidad</th>
+        <th>Disponibilidad</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="item in items" ng-init="disp = item.stockactual1 > item.stockminimo ? 1 : (  item.stockactual1  > 0 ? 0 : -1 ) ">
+        <td>{{item.CODPRODUCTO}}</td>
+        <td>{{item.NOMBRE}}</td>        
+        <td ng-show="showCantidad">{{item.stockactual1}}</td>        
+        <td ng-switch="disp">
+            <span ng-switch-when="1" class="ui green label" style="display:block; width:100%; text-align:center">Disponible</span>
+            <span ng-switch-when="0" class="ui yellow label" style="display:block; width:100%; text-align:center">Consultar</span>
+            <span ng-switch-when="-1" class="ui red label" style="display:block; width:100%; text-align:center">No Disponible</span>
+            
+        </td>        
+      </tr>
+    </tbody>
+</table>

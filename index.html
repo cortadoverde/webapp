@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="TabaApp">
+  <head>
+    <meta charset="utf-8" /> 
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+    <link rel="shortcut icon" sizes="196x196" href="assets/img/icon-196x196.png">
+    
+    
+
+    <script src="/assets/js/jquery/dist/jquery.min.js"></script>
+    <script src="/assets/js/lodash.min.js"></script>
+    <script src="/assets/semantic.min.js"></script>
+    <script src="/assets/js/mousetrap.min.js"></script>
+    <script src="/assets/js/angular.min.js"></script>
+    <script src="/assets/js/angular-route.min.js"></script>
+    <script src="/assets/bower_components/ngDialog/js/ngDialog.min.js"></script>
+    <script src="/assets/bower_components/js-xlsx/dist/xlsx.full.min.js"></script>
+
+    <script src="dist/js/taba.js"></script>
+
+    <link rel="stylesheet" href="assets/semantic.css">
+    <link rel="stylesheet" href="assets/css/theme.css">
+    <link rel="stylesheet" href="/assets/bower_components/ngDialog/css/ngDialog.min.css">
+    <link rel="stylesheet" href="/assets/bower_components/ngDialog/css/ngDialog-theme-default.min.css">
+    <link rel="stylesheet" href="/assets/bower_components/ngDialog/css/ngDialog-custom-width.css">
+    <title>{{ empresa.EMPRESA }}</title>
+
+  </head>
+  <body resizable ng-controller="tabaCtrl">
+      <div ng-include="'partials/header.html'" onload="checkUser()" class="fixnav">
+      
+      </div>
+      <div taba-menu ng-show="auth.logged"></div>      
+      <div class="pusher">
+        <div ng-view></div>
+      </div>  
+  </body>
+</html>

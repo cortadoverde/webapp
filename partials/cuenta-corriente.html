@@ -1,0 +1,60 @@
+<div class="ui dividing header">
+  <div class="content">
+    Pendiente por Cobrar   
+  </div>
+</div>
+
+<a ng-click="changeState()" class="tiny ui black basic button"> {{ switchTo }} </a>
+
+
+<table class="ui  striped black table" ng-if="pendings.length > 0">
+    <thead>
+      <tr>
+        <th>Vence</th>
+        <th>Comprobante</th>
+        <th>Fecha Cbte.</th>
+        <th>Estado</th>
+        <th>Total Cbte.</th>
+        <th>Saldo Cbte.</th>
+        <th>Saldo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="item in pendings">
+        <td>{{item.VenceSql | date:"dd/MM/yyyy" }}</td>
+        <td><a href="#/ver-comprobante/{{item.TipoId}}/{{item.NumeroId}}" ng-click="ver_comprobante($event, item.TipoId, item.NumeroId)"> {{ item.Abreviatura }} {{item.Comprobante}}</a></td>        
+        <td>{{item.FechaSql | date:"dd/MM/yyyy" }}</td>        
+        <td>{{item.EST}}</td>        
+        <td class="text align right" ng-class="{ saldo_negativo : item.Total < 0 }">{{item.Total | currency:"$":2}}</td>        
+        <td class="text align right" ng-class="{ saldo_negativo : item.Saldo < 0 }" >{{item.Saldo | currency:"$":2}}</td>        
+        <td class="text align right" ng-class="{ saldo_negativo : calcSaldo( $index ) < 0 }">{{ calcSaldo( $index ) | currency:"$":2 }}</td>        
+               
+      </tr>
+    </tbody>
+</table>
+
+<table class="ui  unstackable striped black table" ng-if="resumen.length > 0">
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Comprobante</th>
+        <th>Debe</th>
+        <th>Haber</th>
+        <th>Saldo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="item in resumen">
+        <td>{{item.FechaSql | date:"dd/MM/yyyy" }}</td>
+        <td >
+            <a ng-if="item.ClaseCbte != 4" href="#/ver-comprobante/{{item.TipoId}}/{{item.NumeroId}}" ng-click="ver_comprobante($event, item.TipoId, item.NumeroId)"> {{ item.Abreviatura }} {{item.Comprobante}}</a>
+            <span ng-if="item.ClaseCbte == 4"> {{ item.Abreviatura }} {{item.Comprobante}} </span>
+        </td>        
+        <td class="text align right"> {{ item.ImporteCbte | debe | currency:"$":2 }} </td>        
+        <td class="text align right"> {{ item.ImporteCbte | haber | currency:"$":2 }}</td>        
+        <td class="text align right" ng-class="{ saldo_negativo : calcSaldoResumen( $index ) < 0 }">{{ calcSaldoResumen( $index ) | currency:"$":2 }}</td>        
+               
+      </tr>
+    </tbody>
+</table>
+

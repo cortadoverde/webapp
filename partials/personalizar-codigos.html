@@ -1,0 +1,73 @@
+<div class="ui dividing header">
+  <div class="content">
+    Códigos personalizados
+  </div>
+</div>
+
+<section class="actions pedidos">   
+    <section class="search">    
+        <div class="field">
+            <div class="ui left icon input fluid">
+                <i class="search icon"></i>
+                <input type="text" ng-model="search" value="{{search}}" placeholder="Buscar productos" ng-keypress="evalKey($event)"/>
+            </div>
+        </div>
+        <div class="ui buttons">
+          <button class="ui button" ng-click="buscarCodigoProducto()">Código</button>
+        </div>
+    </section>
+    
+    <section class="excel">
+        <label class="file">
+            <div class="ui secondary button">
+                <i class="file excel outline icon"></i> Importar excel
+                
+            </div>
+            <input type="file" on-read-file="showContent($fileContent)" />        
+        </label>
+    </section>
+</section>
+
+
+
+<div class="ui grid" ng-show="resultados.length > 0" style="margin-top:1em">
+
+    
+    <div class="row">   
+        <div  class="column">
+                <table class="ui striped black table">
+                    <thead>
+                        <tr>
+                            <th> Código               </th>
+                            <th> Descripción          </th>
+                            <th> Código Personalizado </th>
+                            <th> Nombre Personalizado </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in resultados" ng-init="disp = item.stockactual1 > item.stockminimo ? 1 : (  item.stockactual1  > 0 ? 0 : -1 ) ">
+                            <td> {{ item.CodProducto }}              </td>
+                            <td> {{ item.Nombre }}                   </td>
+                            <td> 
+                                <div class="ui mini input">
+                                    <input name="{{item.CodProducto}}_codigo" type="text" ng-model="code[item.CodProducto].codigo" ng-init="code[item.CodProducto].codigo = item.CodProductoCliente" value="{{ item.CodProductoCliente }}">
+                                </div>
+                            </td>
+                            <td> 
+                                <div class="ui mini input">
+                                    <input name="{{item.CodProducto}}_nombre" type="text" ng-model="code[item.CodProducto].nombre" ng-init="code[item.CodProducto].nombre = item.CodClienteNombre" value="{{ item.CodClienteNombre }}">
+                                </div>
+                            </td>                                                
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="ui one column stackable center aligned page grid">
+                   <div class="column twelve wide">
+                      <button type="submit" name="Confirmar" id="Confirmar" class="ui blue button" ng-click="crearCodigo()">
+                        <i class="add to cart icon"></i> Confirmar
+                      </button>
+                   </div>
+                </div>
+        </div>
+    </div>
+</div>

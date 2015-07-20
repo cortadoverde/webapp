@@ -1,0 +1,33 @@
+<div class="ui taba display cuenta" ng-show="auth.logged" ng-controller="findUserCtrl">
+    <div ng-show="mode.display">
+        <div class="ui tabaColor dividing header {{auth._type}}" ng-click="editMode()">
+          <div class="content">
+            {{auth._current.Cuenta}} - {{auth._current.Nombre}}
+
+            <span class="sub header"> ({{auth._current.RazonSocial}})</span>
+          </div>
+        </div>
+    </div>
+
+    <div ng-show="mode.search" class="searchNav">
+        <div class="ignored ui popup bottom left visible inverted" style="z-index: 1;top: 28px;left: 0px;" ng-show="search.length == 0">
+             Buscar cliente
+        </div>
+
+        <div class="ui fluid icon input">
+            <input type="text" placeholder="Buscar cliente..." ng-model="search" ng-keydown="keydown($event)" value="{{search}}" autofocus-when="mode.search">
+            <i class="search icon"></i>
+        </div>
+
+        <div class="searchResults" ng-hide="!list.length || selected" tabindex="-1">
+            <div class="ui divided very relaxed animated list">
+                <a class="item selectable" ng-repeat="item in list|filter:model  track by $index" ng-click="selectElm(item)" ng-keydown="selectByEnter($event, item)" tabindex="{{item.idx}}">
+                    <div class="content">
+                        <div class="header">{{item.Cuenta}} - {{item.Nombre}}</div>
+                        {{item.RazonSocial}}
+                    </div>
+                </a>
+            </div>  
+        </div>        
+    </div>
+</div>

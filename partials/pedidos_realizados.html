@@ -1,0 +1,36 @@
+<div class="ui dividing header">
+  <div class="content">
+    Pedidos realizados
+  </div>
+</div>
+
+<div class="ui stackable grid" ng-if="items.length > 0">
+      <div class="row">
+        <div class="column">
+          <div class="ui attached ">
+              <table class="ui  striped black table">
+                <thead>
+                  <tr>
+                    <th>Fecha</th>
+                    <th>Código</th>
+                    <th>Descripción</th>
+                    <th>Cantidad</th>
+                    <th>Detalle</th>
+                    <th>Estado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in items">
+                        <td> {{ item.Fecha | date:"dd/MM/yyyy"}} </td>
+                        <td> {{ item.CodProducto }} </td>
+                        <td> {{ item.Nombre }} </td> 
+                        <td> {{ item.Cantidad }} </td>
+                        <td> {{ item.Detalle }} </td>  
+                        <td> {{ item.Estado | procesoEstado }}</td> 
+                    </tr>                          
+                </tbody>
+              </table>
+          </div>
+        </div>
+      </div>
+    </div>

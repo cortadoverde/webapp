@@ -1,0 +1,56 @@
+body > .stage:first-child {
+  margin-top: 1em;
+
+}
+.stage {
+  @extend %cf;
+  padding:1em;
+}
+
+.stage.main {
+  max-width:90%;
+  margin-left:5%;
+  background:#FFF;
+}
+.ui.panel {
+    @extend %cf;
+    background: url('../img/strip_01.png');
+    text-align: center;
+    padding:0.5em;
+    label {
+      margin:0 auto;
+      display:inline-block;
+      padding:1em;
+      background:#FFF;
+    }
+
+}
+
+.ui.modules .item {
+  position:relative;
+
+    cursor:pointer;
+
+  .ui.label {
+    border-color: rgba(0,0,0,0);
+  }
+}
+
+.stage.main {
+  .left.panel {
+    width:60px;
+  }
+  .right.panel {
+    width:calc(100% - 70px);
+  }
+  .left.panel, .right.panel {
+    float:left;
+  }
+}
+
+.tab-content {
+  padding:0.5em;
+  border-left:solid 1px #ddd;
+  border-bottom:solid 1px #ddd;
+  border-right: solid 1px #ddd;
+}
